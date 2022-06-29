@@ -1,0 +1,55 @@
+﻿@model Epam.Library.ViewModels.Create.CreateNewspaperIssueVM
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/CreateLayout.cshtml";
+}
+
+<h2>Create newspaper issue</h2>
+
+<p>@ViewBag.Error</p>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Number, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Number, new { htmlAttributes = new { @class = "form-control", min = 1 } })
+                @Html.ValidationMessageFor(model => model.Number, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PublishingDate, htmlAttributes: new { @class = "control-label col-md-2", min = "1/1/1400", max = @DateTime.Now })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.PublishingDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.PublishingDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.NewspaperId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.ListBox("Newspaper", ViewBag.Newspaper as SelectList, new { @class = "selectpicker" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", nameof(LibraryObjectController.ShowLibraryObjects), nameof(LibraryObject))
+</div>
+

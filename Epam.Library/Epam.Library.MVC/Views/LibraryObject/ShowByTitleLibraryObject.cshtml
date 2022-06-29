@@ -1,0 +1,86 @@
+﻿@model IEnumerable<DisplayLibraryObjectVM>
+
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+
+<h5>Results: @ViewBag.Title</h5>
+
+@Html.ActionLink("Go back", nameof(LibraryObjectController.ShowLibraryObjects))
+<table class="table table-striped">
+    <tr>
+        <th scope="col">
+            @Html.DisplayName("Information")
+        </th>
+        <th scope="col">
+            @Html.DisplayName("Number of pages")
+        </th>
+        <th scope="col">
+            @Html.DisplayName("Identy")
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Information)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumberOfPages)
+            </td>
+            <td>
+                @if (item is DisplayNewspaperVM)
+                {
+                    DisplayNewspaperVM newItem = (DisplayNewspaperVM)item;
+                    @Html.DisplayFor(modelItem => newItem.ISSN)
+                }
+                @if (item is DisplayBookVM)
+                {
+                    DisplayBookVM newItem = (DisplayBookVM)item;
+                    @Html.DisplayFor(modelItem => newItem.ISBN)
+                }
+                @if (item is DisplayPatentVM)
+                {
+                    DisplayPatentVM newItem = (DisplayPatentVM)item;
+                    @Html.DisplayFor(modelItem => newItem.RegistrationNumber)
+                }
+            </td>
+            <td>
+                @Html.ActionLink("Details", "Details", new { id = item.Id })
+                @Html.ActionLink("Delete", nameof(LibraryObjectController.DeleteLibraryObject), new { id = item.Id })
+                @Html.ActionLink("Check Delete", nameof(LibraryObjectController.CheckLibraryObjectLikeDeleted), new { id = item.Id })
+                @Html.ActionLink("Restore", nameof(LibraryObjectController.RestoreLibraryObject), new { id = item.Id })
+            </td>
+        </tr>
+    }
+
+
+
+
+</table>
+
+<div>
+    @for (int i = ViewBag.CurrentPage - 3; i < ViewBag.CurrentPage + 4; ++i)
+    {
+        if (i > 0 && i != ViewBag.CurrentPage && ViewBag.CurrentPage < ViewBag.MaxPage)
+        {
+            @Html.ActionLink(i.ToString(), nameof(LibraryObjectController.ShowByTitleLibraryObject), new { page = i });
+        }
+        if (i == ViewBag.CurrentPage)
+        {
+            @ViewBag.CurrentPage
+        }
+    }
+
+    @for (int i = ViewBag.MaxPage - 3; i <= ViewBag.MaxPage; ++i)
+    {
+        if (i > 0 && i != ViewBag.CurrentPage)
+        {
+            @Html.ActionLink(i.ToString(), nameof(LibraryObjectController.ShowByTitleLibraryObject), new { page = i });
+        }
+    }
+
+</div>
+
+

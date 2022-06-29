@@ -1,0 +1,9 @@
+﻿<div>
+    @Html.ActionLink("Sort by year direct order", nameof(LibraryObjectController.ShowLibraryObjects), new { sortDirect = true, sortReverse = false })
+</div>
+<div>
+    @Html.ActionLink("Sort by year reverse order", nameof(LibraryObjectController.ShowLibraryObjects), new { sortReverse = true, sortDirect = false })
+</div>
+<div>
+    @Html.ActionLink("Without sort", nameof(LibraryObjectController.ShowLibraryObjects), new { sortDirect = false, sortReverse = false })
+</div>
