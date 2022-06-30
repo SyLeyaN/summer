@@ -215,15 +215,7 @@ B. Восстановить объект.");
                         if (libraryObject is Book)
                         {
                             Console.WriteLine($"\nКнига: {libraryObject}");
-                        }
-                        if (libraryObject is Newspaper)
-                        {
-                            Console.WriteLine($"\nГазета: {libraryObject}");
-                        }
-                        if (libraryObject is Patent)
-                        {
-                            Console.WriteLine($"\nПатент: {libraryObject}");
-                        }
+                        }                        
                     }
                 }
 
@@ -305,11 +297,7 @@ B. Восстановить объект.");
                         if (libraryObject is Book)
                         {
                             Console.WriteLine($"\nКнига: {libraryObject}");
-                        }
-                        if (libraryObject is Patent)
-                        {
-                            Console.WriteLine($"\nПатент: {libraryObject}");
-                        }
+                        }                        
                     }
                 }
                 else

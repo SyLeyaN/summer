@@ -62,6 +62,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BookDatabaseDal.cs" />
+    <Compile Include="LibraryObjectDatabaseDal.cs" />
     <Compile Include="PersonDatabaseDal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

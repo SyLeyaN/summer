@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IBookDal.cs" />
+    <Compile Include="ILibraryObjectDal.cs" />
     <Compile Include="IPersonDal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

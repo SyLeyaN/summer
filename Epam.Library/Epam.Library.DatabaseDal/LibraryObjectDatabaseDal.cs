@@ -76,25 +76,7 @@ namespace Epam.Library.DatabaseDal
                         }
 
                         libraryObjects.Add(newBook);
-                    }
-                    reader.NextResult();
-
-                    while (reader.Read())
-                    {
-                        Person newPerson = new Person();
-
-                        newPerson.Id = (int)reader["PersonId"];
-                        newPerson.Name = (string)reader["Name"];
-                        newPerson.Surname = (string)reader["Surname"];
-                        int bookId = (int)reader["BookId"];
-
-                        Book book = (Book)libraryObjects.FirstOrDefault(b => b.Id == bookId);
-                        if (book != null)
-                            book.Authors.Add(newPerson);
-                    }
-                    reader.NextResult();
-
-
+                    }                                             
                     
                 }
             }
@@ -151,9 +133,6 @@ namespace Epam.Library.DatabaseDal
                         if (book != null)
                             book.Authors.Add(newPerson);
                     }
-                    reader.NextResult();
-
-
                     
                 }
             }
@@ -269,7 +248,9 @@ namespace Epam.Library.DatabaseDal
                         Book book = (Book)libraryObjects.FirstOrDefault(b => b.Id == bookId);
                         if (book != null)
                             book.Authors.Add(newPerson);
-                    }                    
+                    }
+                    reader.NextResult();
+
                 }
             }
             return libraryObjects;
@@ -325,7 +306,7 @@ namespace Epam.Library.DatabaseDal
                         if (book != null)
                             book.Authors.Add(newPerson);
                     }
-                   
+                    
                 }
             }
 
@@ -397,7 +378,9 @@ namespace Epam.Library.DatabaseDal
                         Book book = (Book)libraryObjects.FirstOrDefault(b => b.Id == bookId);
                         if (book != null)
                             book.Authors.Add(newPerson);
-                    }                    
+                    }
+                    
+
                     
                 }
             }
@@ -459,7 +442,8 @@ namespace Epam.Library.DatabaseDal
                         Book book = (Book)libraryObjects.FirstOrDefault(b => b.Id == bookId);
                         if (book != null)
                             book.Authors.Add(newPerson);
-                    }                    
+                    }
+                    
                 }
             }
             IQueryable<LibraryObject> resultLibraryObjects = libraryObjects.AsQueryable()
@@ -521,7 +505,7 @@ namespace Epam.Library.DatabaseDal
                         Book book = (Book)libraryObjects.FirstOrDefault(b => b.Id == bookId);
                         if (book != null)
                             book.Authors.Add(newPerson);
-                    }              
+                    }
 
                     
                 }
@@ -581,7 +565,10 @@ namespace Epam.Library.DatabaseDal
                         Book book = (Book)libraryObjects.FirstOrDefault(b => b.Id == bookId);
                         if (book != null)
                             book.Authors.Add(newPerson);
-                    }                    
+                    }
+                    
+
+                    
                 }
             }
             return libraryObjects;
@@ -639,7 +626,10 @@ namespace Epam.Library.DatabaseDal
                         Book book = (Book)libraryObjects.FirstOrDefault(b => b.Id == bookId);
                         if (book != null)
                             book.Authors.Add(newPerson);
-                    }                    
+                    }
+                   
+
+                    
                 }
             }
             return libraryObjects;

@@ -12,15 +12,7 @@ namespace Epam.Library.Mappers
         public MapperConfig()
         {
             CreateMap<Book, DisplayBookVM>()
-                .ForMember(dst => dst.Information, src => src.MapFrom(s => s.DisplayBookInformationInTable()));
-            CreateMap<Patent, DisplayPatentVM>()
-                .ForMember(dst => dst.Information, src => src.MapFrom(s => s.DisplayPatentInformationInTable()));
-            CreateMap<Newspaper, DisplayNewspaperVM>()
-               .ForMember(dst => dst.Information, src => src.MapFrom(s => s.DisplayNewspaperInformationInTable()));
-           
-            CreateMap<CreateNewspaperVM, Newspaper>();
-            CreateMap<CreateNewspaperIssueVM, NewspaperIssue>();
-            CreateMap<CreatePatentVM, Patent>();
+                .ForMember(dst => dst.Information, src => src.MapFrom(s => s.DisplayBookInformationInTable()));            
             CreateMap<CreatePersonVM, Person>();
             CreateMap<Person, DisplayPersonVM>()
                 .ForMember(dst => dst.NameSurname, src => src.MapFrom(s => $"{s.Name} {s.Surname}"));
