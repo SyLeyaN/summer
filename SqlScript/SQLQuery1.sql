@@ -1,27 +1,27 @@
 
-CREATE DATABASE Library_DataBase;
-GO
+--CREATE DATABASE Library_DataBase;
+--GO
 
-USE Library_DataBase;
-GO
-CREATE ROLE User_role AUTHORIZATION simple_user_for_library;  
-GO
-ALTER ROLE User_role ADD MEMBER simple_user_for_library;  
-GO
-ALTER ROLE User_role ADD MEMBER librarian_for_library;  
-GO
-ALTER ROLE User_role ADD MEMBER admin_for_library;  
-GO
-CREATE ROLE Librarian_role AUTHORIZATION librarian_for_library;  
-GO
-ALTER ROLE Librarian_role ADD MEMBER admin_for_library;  
-GO
-ALTER ROLE Librarian_role ADD MEMBER librarian_for_library;  
-GO
-CREATE ROLE Admin_role AUTHORIZATION admin_for_library;  
-GO
-ALTER ROLE Admin_role ADD MEMBER admin_for_library;  
-GO
+--USE Library_DataBase;
+--GO
+--CREATE ROLE User_role AUTHORIZATION simple_user_for_library;  
+--GO
+--ALTER ROLE User_role ADD MEMBER simple_user_for_library;  
+--GO
+--ALTER ROLE User_role ADD MEMBER librarian_for_library;  
+--GO
+--ALTER ROLE User_role ADD MEMBER admin_for_library;  
+--GO
+--CREATE ROLE Librarian_role AUTHORIZATION librarian_for_library;  
+--GO
+--ALTER ROLE Librarian_role ADD MEMBER admin_for_library;  
+--GO
+--ALTER ROLE Librarian_role ADD MEMBER librarian_for_library;  
+--GO
+--CREATE ROLE Admin_role AUTHORIZATION admin_for_library;  
+--GO
+--ALTER ROLE Admin_role ADD MEMBER admin_for_library;  
+--GO
 
 CREATE TABLE LibraryObjectsTypes
 (Id TINYINT NOT NULL,
@@ -128,7 +128,7 @@ ALTER TABLE NewspaperIssues
 ADD CheckDelete BIT NULL
 GO
 
-CREATE OR ALTER PROCEDURE SelectAllBooks
+CREATE   PROCEDURE SelectAllBooks
 AS
 BEGIN
 SELECT 
@@ -162,7 +162,7 @@ GO
 GRANT EXECUTE ON OBJECT::dbo.SelectAllBooks 
     TO User_role;  
 
-CREATE OR ALTER PROCEDURE SelectAllPatents
+CREATE   PROCEDURE SelectAllPatents
 AS
 BEGIN
 SELECT 
@@ -197,7 +197,7 @@ GO
 GRANT EXECUTE ON OBJECT::dbo.SelectAllPatents 
     TO User_role;
 
-CREATE OR ALTER PROCEDURE SelectAllNewspapers
+CREATE   PROCEDURE SelectAllNewspapers
 AS
 BEGIN
 SELECT 
@@ -230,7 +230,7 @@ GO
 GRANT EXECUTE ON OBJECT::dbo.SelectAllNewspapers 
     TO User_role;
 
-CREATE OR ALTER PROCEDURE SelectAllPersons
+CREATE   PROCEDURE SelectAllPersons
 AS
 BEGIN
 SELECT 
@@ -243,7 +243,7 @@ GO
 GRANT EXECUTE ON OBJECT::dbo.SelectAllPersons
     TO User_role;
 
-CREATE OR ALTER PROCEDURE SelectByIdBooks
+CREATE   PROCEDURE SelectByIdBooks
 @BookId INT
 AS
 BEGIN
@@ -278,7 +278,7 @@ GO
 GRANT EXECUTE ON OBJECT::dbo.SelectByIdBooks
     TO User_role;
 
-CREATE OR ALTER PROCEDURE SelectByIdPatents
+CREATE   PROCEDURE SelectByIdPatents
 @PatentId INT
 AS
 BEGIN
@@ -314,7 +314,7 @@ GO
 GRANT EXECUTE ON OBJECT::dbo.SelectByIdPatents
     TO User_role;
 
-CREATE OR ALTER PROCEDURE SelectByIdNewspapers
+CREATE   PROCEDURE SelectByIdNewspapers
 @NewspaperId INT
 AS
 BEGIN
@@ -344,7 +344,7 @@ GO
 GRANT EXECUTE ON OBJECT::dbo.SelectByIdNewspapers
     TO User_role;
 
-CREATE OR ALTER PROCEDURE SelectByIdPersons
+CREATE   PROCEDURE SelectByIdPersons
 @PersonId INT
 AS
 BEGIN
@@ -360,7 +360,7 @@ GO
 GRANT EXECUTE ON OBJECT::dbo.SelectByIdPersons
     TO User_role;
 
-CREATE OR ALTER PROCEDURE DeletePerson
+CREATE   PROCEDURE DeletePerson
 @PersonId INT
 AS
 BEGIN
@@ -373,7 +373,7 @@ GO
 GRANT EXECUTE ON OBJECT::dbo.DeletePerson
     TO Admin_role;
 
-CREATE OR ALTER PROCEDURE SelectByTitleLibraryObjects
+CREATE   PROCEDURE SelectByTitleLibraryObjects
 @Title NVARCHAR(300)
 AS
 BEGIN
@@ -477,7 +477,7 @@ GO
 GRANT EXECUTE ON OBJECT::dbo.SelectByTitleLibraryObjects
     TO User_role;
 
-CREATE OR ALTER PROCEDURE SelectAllLibraryObjects
+CREATE   PROCEDURE SelectAllLibraryObjects
 AS
 BEGIN
 
@@ -562,7 +562,7 @@ GO
 GRANT EXECUTE ON OBJECT::dbo.SelectAllLibraryObjects
     TO User_role;
 
-CREATE OR ALTER PROCEDURE DeleteByIdLibraryObject
+CREATE   PROCEDURE DeleteByIdLibraryObject
 @IdForDelete INT 
 AS
 BEGIN
@@ -627,7 +627,7 @@ GO
 GRANT EXECUTE ON OBJECT::dbo.DeleteByIdLibraryObject
     TO Admin_role;
 
-CREATE OR ALTER PROCEDURE SelectByAuthorBooks
+CREATE   PROCEDURE SelectByAuthorBooks
 @AuthorId INT
 AS
 BEGIN
@@ -664,7 +664,7 @@ GO
 GRANT EXECUTE ON OBJECT::dbo.SelectByAuthorBooks
     TO User_role;
 
-CREATE OR ALTER PROCEDURE SelectByInventorPatents
+CREATE   PROCEDURE SelectByInventorPatents
 @InventorId INT
 AS
 BEGIN
@@ -703,7 +703,7 @@ GO
 GRANT EXECUTE ON OBJECT::dbo.SelectByInventorPatents
     TO User_role;
 
-CREATE OR ALTER PROCEDURE SelectBooksPatentsByPerson
+CREATE   PROCEDURE SelectBooksPatentsByPerson
 @PersonId INT
 AS
 BEGIN
@@ -770,7 +770,7 @@ GO
 GRANT EXECUTE ON OBJECT::dbo.SelectBooksPatentsByPerson
     TO User_role;
 
-CREATE OR ALTER PROCEDURE SelectByPublishingHouseBooks
+CREATE   PROCEDURE SelectByPublishingHouseBooks
 @PublishingHouseFilter NVARCHAR (300)
 AS
 BEGIN
@@ -808,7 +808,7 @@ GO
 GRANT EXECUTE ON OBJECT::dbo.SelectByPublishingHouseBooks
     TO User_role;
 
-CREATE OR ALTER PROCEDURE InsertPerson
+CREATE   PROCEDURE InsertPerson
 @Name NVARCHAR (50),
 @Surname NVARCHAR (200),
 @Id INT OUTPUT
@@ -827,7 +827,7 @@ CREATE NONCLUSTERED INDEX IX_NewspaperIssue_PublishingDate
     ON dbo.NewspaperIssues (PublishingDate);
 GO
 
-CREATE OR ALTER PROCEDURE InsertNewspaperIssue
+CREATE   PROCEDURE InsertNewspaperIssue
 @Number INT,
 @PublishingDate DATE,
 @NewspaperId INT,
@@ -878,7 +878,7 @@ CREATE NONCLUSTERED INDEX IX_LibraryObject_Title
     ON dbo.LibraryObjects (Title);
 GO
 
-CREATE OR ALTER PROCEDURE InsertNewspaper
+CREATE   PROCEDURE InsertNewspaper
 @Title NVARCHAR (300),
 @NumberOfPages INT,
 @PublishingYear INT,
@@ -964,7 +964,7 @@ CREATE NONCLUSTERED INDEX IX_LibraryObject_TitlePublishingYear
     ON dbo.LibraryObjects (Title, PublishingYear);
 GO
 
-CREATE OR ALTER PROCEDURE InsertBook
+CREATE   PROCEDURE InsertBook
 @Title NVARCHAR (300),
 @NumberOfPages INT,
 @PublishingYear INT,
@@ -1037,7 +1037,7 @@ CREATE NONCLUSTERED INDEX IX_Patent_CountryRegistrationNumber
     ON dbo.Patents (Country, RegistrationNumber);
 GO
 
-CREATE OR ALTER PROCEDURE InsertPatent
+CREATE   PROCEDURE InsertPatent
 @Title NVARCHAR (300),
 @NumberOfPages INT,
 @PublishingYear INT,
@@ -1095,7 +1095,7 @@ GRANT EXECUTE ON OBJECT::dbo.InsertPatent
     TO Librarian_role;
 
 
-CREATE OR ALTER PROCEDURE CheckObjectLikeDeletedById
+CREATE   PROCEDURE CheckObjectLikeDeletedById
 @ObjectId INT
 AS
 BEGIN
@@ -1121,7 +1121,7 @@ GO
 GRANT EXECUTE ON OBJECT::dbo.CheckObjectLikeDeletedById
     TO Librarian_role;
 
-CREATE OR ALTER PROCEDURE SelectAllDeletedObjects
+CREATE   PROCEDURE SelectAllDeletedObjects
 AS
 BEGIN
 SELECT 
@@ -1205,7 +1205,7 @@ GO
 GRANT EXECUTE ON OBJECT::dbo.SelectAllDeletedObjects
     TO Admin_role;
 
-CREATE OR ALTER PROCEDURE RestoreObjectById
+CREATE   PROCEDURE RestoreObjectById
 @ObjectId INT
 AS
 BEGIN
@@ -1242,7 +1242,7 @@ CONSTRAINT PK_Id PRIMARY KEY (Id)
 );
 GO
 
-CREATE OR ALTER TRIGGER InsertNewLibraryObject
+CREATE   TRIGGER InsertNewLibraryObject
 ON dbo.LibraryObjects
 AFTER INSERT
 AS
@@ -1256,7 +1256,7 @@ BEGIN
 END
 GO
 
-CREATE OR ALTER TRIGGER InsertNewBook
+CREATE   TRIGGER InsertNewBook
 ON dbo.Books
 AFTER INSERT
 AS
@@ -1270,7 +1270,7 @@ BEGIN
 END
 GO
 
-CREATE OR ALTER TRIGGER InsertNewNewspaper
+CREATE   TRIGGER InsertNewNewspaper
 ON dbo.Newspapers
 AFTER INSERT
 AS
@@ -1285,7 +1285,7 @@ END
 GO
 
 
-CREATE OR ALTER TRIGGER InsertNewPatent
+CREATE   TRIGGER InsertNewPatent
 ON dbo.Patents
 AFTER INSERT
 AS
@@ -1300,7 +1300,7 @@ BEGIN
 END
 GO
 
-CREATE OR ALTER TRIGGER InsertNewNewspaperIssue
+CREATE   TRIGGER InsertNewNewspaperIssue
 ON dbo.NewspaperIssues
 AFTER INSERT
 AS
@@ -1316,7 +1316,7 @@ GO
 
 SELECT 'My string: ' + ISNULL(CAST('ass' AS NVARCHAR(15)), 'NULL');
 
-CREATE OR ALTER TRIGGER InsertNewPerson
+CREATE   TRIGGER InsertNewPerson
 ON dbo.Persons
 AFTER INSERT
 AS
@@ -1334,7 +1334,7 @@ ALTER TABLE dbo.BooksPersons
 ADD Id INT NOT NULL IDENTITY (1, 1)
 GO
 
-CREATE OR ALTER TRIGGER InsertNewPersonBook
+CREATE   TRIGGER InsertNewPersonBook
 ON dbo.BooksPersons
 AFTER INSERT
 AS
@@ -1352,7 +1352,7 @@ ALTER TABLE dbo.PatentsPersons
 ADD Id INT NOT NULL IDENTITY (1, 1)
 GO
 
-CREATE OR ALTER TRIGGER InsertNewPersonPatent
+CREATE   TRIGGER InsertNewPersonPatent
 ON dbo.PatentsPersons
 AFTER INSERT
 AS
@@ -1366,7 +1366,7 @@ END
 GO
 
 
-CREATE OR ALTER TRIGGER CheckObjectByDeleted
+CREATE   TRIGGER CheckObjectByDeleted
 ON dbo.LibraryObjects
 AFTER UPDATE
 AS
@@ -1381,7 +1381,7 @@ BEGIN
 END
 GO
 
-CREATE OR ALTER TRIGGER CheckNewspaperIssueByDeleted
+CREATE   TRIGGER CheckNewspaperIssueByDeleted
 ON dbo.NewspaperIssues
 AFTER UPDATE
 AS
@@ -1397,7 +1397,7 @@ BEGIN
 END
 GO
 
-CREATE OR ALTER TRIGGER DeleteLibraryObject
+CREATE   TRIGGER DeleteLibraryObject
 ON dbo.LibraryObjects
 AFTER DELETE
 AS
@@ -1411,7 +1411,7 @@ BEGIN
 END
 GO
 	
-CREATE OR ALTER TRIGGER DeleteBook
+CREATE   TRIGGER DeleteBook
 ON dbo.Books
 AFTER DELETE
 AS
@@ -1425,7 +1425,7 @@ BEGIN
 END
 GO
 
-CREATE OR ALTER TRIGGER DeletePatent
+CREATE   TRIGGER DeletePatent
 ON dbo.Patents
 AFTER DELETE
 AS
@@ -1440,7 +1440,7 @@ BEGIN
 END
 GO
 
-CREATE OR ALTER TRIGGER DeleteNewspaper
+CREATE   TRIGGER DeleteNewspaper
 ON dbo.Newspapers
 AFTER DELETE
 AS
@@ -1454,7 +1454,7 @@ BEGIN
 END
 GO
 
-CREATE OR ALTER TRIGGER DeleteNewspaperIssue
+CREATE   TRIGGER DeleteNewspaperIssue
 ON dbo.NewspaperIssues
 AFTER DELETE
 AS
@@ -1468,7 +1468,7 @@ BEGIN
 END
 GO
 
-CREATE OR ALTER TRIGGER DeleteNewPerson
+CREATE   TRIGGER DeleteNewPerson
 ON dbo.Persons
 AFTER DELETE
 AS
@@ -1482,7 +1482,7 @@ BEGIN
 END
 GO
 
-CREATE OR ALTER TRIGGER DeletePersonBook
+CREATE   TRIGGER DeletePersonBook
 ON dbo.BooksPersons
 AFTER DELETE
 AS
@@ -1496,7 +1496,7 @@ BEGIN
 END
 GO
 
-CREATE OR ALTER TRIGGER DeletePersonPatent
+CREATE   TRIGGER DeletePersonPatent
 ON dbo.PatentsPersons
 AFTER DELETE
 AS
@@ -1513,7 +1513,7 @@ CREATE NONCLUSTERED INDEX IX_NewspaperIssue_NewspaperIdNewspaperIssueId
 ON dbo.NewspaperIssues (NewspaperId, NewspaperIssueId);
 GO
 
-CREATE OR ALTER PROCEDURE DeleteNewspaperIssueById
+CREATE   PROCEDURE DeleteNewspaperIssueById
 @NewspaperId INT,
 @NewspaperIssueId INT
 AS
@@ -1526,7 +1526,7 @@ END
 
 GO
 
-CREATE OR ALTER PROCEDURE CheckNewspaperIssueLikeDeletedById
+CREATE   PROCEDURE CheckNewspaperIssueLikeDeletedById
 @NewspaperId INT,
 @NewspaperIssueId INT
 AS
@@ -1539,7 +1539,7 @@ END
 
 GO
 
-CREATE OR ALTER PROCEDURE RestoreNewspaperIssue
+CREATE   PROCEDURE RestoreNewspaperIssue
 @NewspaperId INT,
 @NewspaperIssueId INT
 AS
@@ -1552,12 +1552,3 @@ END
 
 GO
 
-
-
-	DELETE FROM PatentsPersons
-	DELETE FROM Books
-	DELETE FROM Patents
-	DELETE FROM NewspaperIssues
-	DELETE FROM Newspapers
-	DELETE FROM LibraryObjects
-	SELECT * FROM LibraryObjects

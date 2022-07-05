@@ -633,7 +633,7 @@ Enter для выхода в главное меню");
                 Console.WriteLine("Объект уже существует");
                 return;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 Console.WriteLine("Произошла ошибка, повторите ввод данных");
                 return;
